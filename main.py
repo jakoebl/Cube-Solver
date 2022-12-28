@@ -129,21 +129,32 @@ def g4_coordinate(perm):
     return g4.coordinate(result)
 
 
+def string_from_perm(perm):
+    result = ""
+    for element in perm:
+        result += element
+    return result
+
+
 # read all lines
 g1_file = open("lookup_g1", "r")
 g2_file = open("lookup_g2", "r")
 g3_file = open("lookup_g3", "r")
-g4_file = open("moves_g4", "r")
+g4_move = open("moves_g4", "r")
+g4_string = open("strings_g4", "r")
 
 g1_table = g1_file.readlines()
 g2_table = g2_file.readlines()
 g3_table = g3_file.readlines()
-g4_table = g4_file.readlines()
+g4_moves = g4_move.readlines()
+g4_strings = g4_string.readlines()
 
 g1_file.close()
 g2_file.close()
 g3_file.close()
-g4_file.close()
+g4_move.close()
+g4_string.close()
+
 move_list = []
 
 
@@ -163,13 +174,8 @@ def lookup_moves(table, coordinate):
     return result
 
 
-for mov in move.moves_g4:
-    res = ""
-    for element in m.apply_single("uuuuuuuuffffffffllllllllbbbbbbbbrrrrrrrrdddddddd", mov):
-        res += element
-    print(res)
 # input perm in facelet notation
-input_perm = m.apply(move.D2, move.B2, move.F2, move.R2, move.U2, move.L2, move.U2, move.B2, move.L2, move.R2)
+input_perm = m.apply(move.D2, move.B2, move.F2, move.L2, move.U2, move.L2, move.U2, move.B2, move.L2, move.R2)
 # solution is a list of ints
 solution_g1 = move.invert(lookup_moves(g1_table, g1_coordinate(input_perm)))
 if solution_g1:
@@ -196,7 +202,7 @@ if solution_g3:
 for move_index in solution_g3:
     input_perm = m.apply_single(input_perm, move.moves[move_index])
 
-solution_g4 = move.invert(move.translate(lookup_moves(g4_table, g4_coordinate(input_perm)), move.moves_g4))
+solution_g4 = move.invert(move.translate(lookup_moves(g4_moves, g4_strings.index(string_from_perm(input_perm))), move.moves_g4))
 if solution_g4:
     print(solution_g4)
 # bring input to g4:
@@ -209,4 +215,3 @@ if not input_perm == move.identity:
 
 solution = solution_g1 + solution_g2 + solution_g3 + solution_g4
 print(move.moves_string(solution))
-print(lookup_moves(g4_table, 172573))
