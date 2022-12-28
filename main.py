@@ -1,227 +1,20 @@
-# Identity
-
-identity = ['u1', 'u2', 'u3', 'u4', 'u5', 'u6', 'u7', 'u8',
-            'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8',
-            'l1', 'l2', 'l3', 'l4', 'l5', 'l6', 'l7', 'l8',
-            'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'b8',
-            'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7', 'r8',
-            'd1', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8']
-
-co_no_buffer = ['u1', 'u3', 'u7',
-                'f1', 'f5', 'f7',
-                'l1', 'l3', 'l5', 'l7',
-                'b1', 'b3', 'b5', 'b7',
-                'r3', 'r5', 'r7',
-                'd1', 'd3', 'd5', 'd7']
-
-co_w_buffer = ['u1', 'u3', 'u5' 'u7',
-               'f1', 'f3', 'f5', 'f7',
-               'l1', 'l3', 'l5', 'l7',
-               'b1', 'b3', 'b5', 'b7',
-               'r1', 'r3', 'r5', 'r7',
-               'd1', 'd3', 'd5', 'd7']
-
-# cubies
-
-UBL = ('u1', 'b3', 'l1')
-UBR = ('u3', 'b1', 'r3')
-UFL = ('u7', 'f1', 'l3')
-UFR = ('u5', 'f3', 'r1')
-DBL = ('d7', 'b5', 'l7')
-DBR = ('d5', 'b7', 'r5')
-DFL = ('d1', 'f7', 'l5')
-DFR = ('d3', 'f5', 'r7')
-
-cubies = [UBL, UBR, UFR, UFL, DFL, DFR, DBR, DBL]
-# Moves
-
-U = ['u3', 'u4', 'u5', 'u6', 'u7', 'u8', 'u1', 'u2',
-     'l1', 'l2', 'l3', 'f4', 'f5', 'f6', 'f7', 'f8',
-     'b1', 'b2', 'b3', 'l4', 'l5', 'l6', 'l7', 'l8',
-     'r1', 'r2', 'r3', 'b4', 'b5', 'b6', 'b7', 'b8',
-     'f1', 'f2', 'f3', 'r4', 'r5', 'r6', 'r7', 'r8',
-     'd1', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8']
-
-U_PR = ['u7', 'u8', 'u1', 'u2', 'u3', 'u4', 'u5', 'u6',
-        'r1', 'r2', 'r3', 'f4', 'f5', 'f6', 'f7', 'f8',
-        'f1', 'f2', 'f3', 'l4', 'l5', 'l6', 'l7', 'l8',
-        'l1', 'l2', 'l3', 'b4', 'b5', 'b6', 'b7', 'b8',
-        'b1', 'b2', 'b3', 'r4', 'r5', 'r6', 'r7', 'r8',
-        'd1', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8']
-
-U2 = ['u5', 'u6', 'u7', 'u8', 'u1', 'u2', 'u3', 'u4',
-      'b1', 'b2', 'b3', 'f4', 'f5', 'f6', 'f7', 'f8',
-      'r1', 'r2', 'r3', 'l4', 'l5', 'l6', 'l7', 'l8',
-      'f1', 'f2', 'f3', 'b4', 'b5', 'b6', 'b7', 'b8',
-      'l1', 'l2', 'l3', 'r4', 'r5', 'r6', 'r7', 'r8',
-      'd1', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8']
-
-F = ['u1', 'u2', 'u3', 'u4', 'r7', 'r8', 'r1', 'u8',
-     'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f1', 'f2',
-     'l1', 'l2', 'u5', 'u6', 'u7', 'l6', 'l7', 'l8',
-     'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'b8',
-     'd3', 'r2', 'r3', 'r4', 'r5', 'r6', 'd1', 'd2',
-     'l3', 'l4', 'l5', 'd4', 'd5', 'd6', 'd7', 'd8']
-
-F_PR = ['u1', 'u2', 'u3', 'u4', 'l3', 'l4', 'l5', 'u8',
-        'f7', 'f8', 'f1', 'f2', 'f3', 'f4', 'f5', 'f6',
-        'l1', 'l2', 'd1', 'd2', 'd3', 'l6', 'l7', 'l8',
-        'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'b8',
-        'u7', 'r2', 'r3', 'r4', 'r5', 'r6', 'u5', 'u6',
-        'r7', 'r8', 'r1', 'd4', 'd5', 'd6', 'd7', 'd8']
-
-F2 = ['u1', 'u2', 'u3', 'u4', 'd1', 'd2', 'd3', 'u8',
-      'f5', 'f6', 'f7', 'f8', 'f1', 'f2', 'f3', 'f4',
-      'l1', 'l2', 'r7', 'r8', 'r1', 'l6', 'l7', 'l8',
-      'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'b8',
-      'l5', 'r2', 'r3', 'r4', 'r5', 'r6', 'l3', 'l4',
-      'u5', 'u6', 'u7', 'd4', 'd5', 'd6', 'd7', 'd8']
-
-L = ['f1', 'u2', 'u3', 'u4', 'u5', 'u6', 'f7', 'f8',
-     'd1', 'f2', 'f3', 'f4', 'f5', 'f6', 'd7', 'd8',
-     'l3', 'l4', 'l5', 'l6', 'l7', 'l8', 'l1', 'l2',
-     'b1', 'b2', 'u7', 'u8', 'u1', 'b6', 'b7', 'b8',
-     'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7', 'r8',
-     'b5', 'd2', 'd3', 'd4', 'd5', 'd6', 'b3', 'b4']
-
-L_PR = ['b5', 'u2', 'u3', 'u4', 'u5', 'u6', 'b3', 'b4',
-        'u1', 'f2', 'f3', 'f4', 'f5', 'f6', 'u7', 'u8',
-        'l7', 'l8', 'l1', 'l2', 'l3', 'l4', 'l5', 'l6',
-        'b1', 'b2', 'd7', 'd8', 'd1', 'b6', 'b7', 'b8',
-        'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7', 'r8',
-        'f1', 'd2', 'd3', 'd4', 'd5', 'd6', 'f7', 'f8']
-
-L2 = ['d1', 'u2', 'u3', 'u4', 'u5', 'u6', 'd7', 'd8',
-      'b5', 'f2', 'f3', 'f4', 'f5', 'f6', 'b3', 'b4',
-      'l5', 'l6', 'l7', 'l8', 'l1', 'l2', 'l3', 'l4',
-      'b1', 'b2', 'f7', 'f8', 'f1', 'b6', 'b7', 'b8',
-      'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7', 'r8',
-      'u1', 'd2', 'd3', 'd4', 'd5', 'd6', 'u7', 'u8']
-
-B = ['l7', 'l8', 'l1', 'u4', 'u5', 'u6', 'u7', 'u8',
-     'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8',
-     'd7', 'l2', 'l3', 'l4', 'l5', 'l6', 'd5', 'd6',
-     'b3', 'b4', 'b5', 'b6', 'b7', 'b8', 'b1', 'b2',
-     'r1', 'r2', 'u1', 'u2', 'u3', 'r6', 'r7', 'r8',
-     'd1', 'd2', 'd3', 'd4', 'r3', 'r4', 'r5', 'd8']
-
-B_PR = ['r3', 'r4', 'r5', 'u4', 'u5', 'u6', 'u7', 'u8',
-        'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8',
-        'u3', 'l2', 'l3', 'l4', 'l5', 'l6', 'u1', 'u2',
-        'b7', 'b8', 'b1', 'b2', 'b3', 'b4', 'b5', 'b6',
-        'r1', 'r2', 'd5', 'd6', 'd7', 'r6', 'r7', 'r8',
-        'd1', 'd2', 'd3', 'd4', 'l7', 'l8', 'l1', 'd8']
-
-B2 = ['d5', 'd6', 'd7', 'u4', 'u5', 'u6', 'u7', 'u8',
-      'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8',
-      'r5', 'l2', 'l3', 'l4', 'l5', 'l6', 'r3', 'r4',
-      'b5', 'b6', 'b7', 'b8', 'b1', 'b2', 'b3', 'b4',
-      'r1', 'r2', 'l7', 'l8', 'l1', 'r6', 'r7', 'r8',
-      'd1', 'd2', 'd3', 'd4', 'u1', 'u2', 'u3', 'd8']
-
-R = ['u1', 'u2', 'b7', 'b8', 'b1', 'u6', 'u7', 'u8',
-     'f1', 'f2', 'u3', 'u4', 'u5', 'f6', 'f7', 'f8',
-     'l1', 'l2', 'l3', 'l4', 'l5', 'l6', 'l7', 'l8',
-     'd5', 'b2', 'b3', 'b4', 'b5', 'b6', 'd3', 'd4',
-     'r3', 'r4', 'r5', 'r6', 'r7', 'r8', 'r1', 'r2',
-     'd1', 'd2', 'f3', 'f4', 'f5', 'd6', 'd7', 'd8']
-
-R_PR = ['u1', 'u2', 'f3', 'f4', 'f5', 'u6', 'u7', 'u8',
-        'f1', 'f2', 'd3', 'd4', 'd5', 'f6', 'f7', 'f8',
-        'l1', 'l2', 'l3', 'l4', 'l5', 'l6', 'l7', 'l8',
-        'u5', 'b2', 'b3', 'b4', 'b5', 'b6', 'u3', 'u4',
-        'r7', 'r8', 'r1', 'r2', 'r3', 'r4', 'r5', 'r6',
-        'd1', 'd2', 'b7', 'b8', 'b1', 'd6', 'd7', 'd8']
-
-R2 = ['u1', 'u2', 'd3', 'd4', 'd5', 'u6', 'u7', 'u8',
-      'f1', 'f2', 'b7', 'b8', 'b1', 'f6', 'f7', 'f8',
-      'l1', 'l2', 'l3', 'l4', 'l5', 'l6', 'l7', 'l8',
-      'f5', 'b2', 'b3', 'b4', 'b5', 'b6', 'f3', 'f4',
-      'r5', 'r6', 'r7', 'r8', 'r1', 'r2', 'r3', 'r4',
-      'd1', 'd2', 'u3', 'u4', 'u5', 'd6', 'd7', 'd8']
-
-D = ['u1', 'u2', 'u3', 'u4', 'u5', 'u6', 'u7', 'u8',
-     'f1', 'f2', 'f3', 'f4', 'r5', 'r6', 'r7', 'f8',
-     'l1', 'l2', 'l3', 'l4', 'f5', 'f6', 'f7', 'l8',
-     'b1', 'b2', 'b3', 'b4', 'l5', 'l6', 'l7', 'b8',
-     'r1', 'r2', 'r3', 'r4', 'b5', 'b6', 'b7', 'r8',
-     'd3', 'd4', 'd5', 'd6', 'd7', 'd8', 'd1', 'd2']
-
-D_PR = ['u1', 'u2', 'u3', 'u4', 'u5', 'u6', 'u7', 'u8',
-        'f1', 'f2', 'f3', 'f4', 'l5', 'l6', 'l7', 'f8',
-        'l1', 'l2', 'l3', 'l4', 'b5', 'b6', 'b7', 'l8',
-        'b1', 'b2', 'b3', 'b4', 'r5', 'r6', 'r7', 'b8',
-        'r1', 'r2', 'r3', 'r4', 'f5', 'f6', 'f7', 'r8',
-        'd7', 'd8', 'd1', 'd2', 'd3', 'd4', 'd5', 'd6']
-
-D2 = ['u1', 'u2', 'u3', 'u4', 'u5', 'u6', 'u7', 'u8',
-      'f1', 'f2', 'f3', 'f4', 'b5', 'b6', 'b7', 'f8',
-      'l1', 'l2', 'l3', 'l4', 'r5', 'r6', 'r7', 'l8',
-      'b1', 'b2', 'b3', 'b4', 'f5', 'f6', 'f7', 'b8',
-      'r1', 'r2', 'r3', 'r4', 'l5', 'l6', 'l7', 'r8',
-      'd5', 'd6', 'd7', 'd8', 'd1', 'd2', 'd3', 'd4']
-
-# Rotations
-
-x = ['b5', 'b6', 'b7', 'b8', 'b1', 'b2', 'b3', 'b4',
-     'u1', 'u2', 'u3', 'u4', 'u5', 'u6', 'u7', 'u8',
-     'l7', 'l8', 'l1', 'l2', 'l3', 'l4', 'l5', 'l6',
-     'd5', 'd6', 'd7', 'd8', 'd1', 'd2', 'd3', 'd4',
-     'r3', 'r4', 'r5', 'r6', 'r7', 'r8', 'r1', 'r2',
-     'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8']
-
-y = ['u3', 'u4', 'u5', 'u6', 'u7', 'u8', 'u1', 'u2',
-     'l1', 'l2', 'l3', 'l4', 'l5', 'l6', 'l7', 'l8',
-     'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'b8',
-     'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7', 'r8',
-     'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8',
-     'd7', 'd8', 'd1', 'd2', 'd3', 'd4', 'd5', 'd6']
-
-z = ['r3', 'r4', 'r5', 'r6', 'r7', 'r8', 'r1', 'r2',
-     'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f1', 'f2',
-     'u3', 'u4', 'u5', 'u6', 'u7', 'u8', 'u1', 'u2',
-     'b7', 'b8', 'b1', 'b2', 'b3', 'b4', 'b5', 'b6',
-     'd3', 'd4', 'd5', 'd6', 'd7', 'd8', 'd1', 'd2',
-     'l3', 'l4', 'l5', 'l6', 'l7', 'l8', 'l1', 'l2']
-
-# Lists
-moves = [U, U_PR, U2, F, F_PR, F2, L, L_PR, L2, B, B_PR, B2, R, R_PR, R2, D, D_PR, D2]
-
-
-# multiplication in "goes to" notation
-# list 2 is the 1st move
-def multiplication(perm1, perm2):
-    i = 0
-    result = []
-    while i < 48:
-        result.append(perm1[identity.index(perm2[i])])
-        i += 1
-    return result
-
-
-def inverse(perm):
-    i = 0
-    result = []
-    while i < 48:
-        result.append(identity[perm.index(identity[i])])
-        i += 1
-    return result
-
-
-def mult(*perms):
-    result = identity
-    for perm in perms:
-        result = multiplication(perm, result)
-    return result
-
-
-def inv(*perms):
-    result = mult(*perms)
-    return inverse(result)
+import generate_g1 as g1
+import generate_g2 as g2
+import generate_g3 as g3
+import generate_g4 as g4
+import move_tables as move
+import facelet_moves as m
+import facelet_manipulation_stuff as p
+identity = ['u', 'u', 'u', 'u', 'u', 'u', 'u', 'u',
+            'f', 'f', 'f', 'f', 'f', 'f', 'f', 'f',
+            'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l',
+            'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b',
+            'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
+            'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd']
 
 
 def corners(*perms):
-    perm = mult(*perms)
+    perm = m.mult(*perms)
     result = []
     i = 0
     while i < 48:
@@ -231,7 +24,7 @@ def corners(*perms):
 
 
 def edges(*perms):
-    perm = mult(*perms)
+    perm = m.mult(*perms)
     result = []
     i = 1
     while i < 48:
@@ -240,85 +33,175 @@ def edges(*perms):
     return result
 
 
-# pretty print is in "replaced by" notation
-def pretty_print(*perm_goes_to):
-    perm = inv(*perm_goes_to)
-    print("        ",                   perm[0], perm[1],   perm[2], "\n" +
-          "        ",                   perm[7], "U ",      perm[3], "\n" +
-          "        ",                   perm[6], perm[5],   perm[4], "\n" +
-          perm[16], perm[17], perm[18], perm[8], perm[9],   perm[10], perm[32], perm[33], perm[34], "\n" +
-          perm[23], "L ",     perm[19], perm[15], "F ",     perm[11], perm[39], "R ",     perm[35], "\n" +
-          perm[22], perm[21], perm[20], perm[14], perm[13], perm[12], perm[38], perm[37], perm[36], "\n" +
-          "        ",                   perm[40], perm[41], perm[42], "\n" +
-          "        ",                   perm[47], "D ",     perm[43], "\n" +
-          "        ",                   perm[46], perm[45], perm[44], "\n" +
-          "        ",                   perm[28], perm[29], perm[30], "\n" +
-          "        ",                   perm[27], "B ",     perm[31], "\n" +
-          "        ",                   perm[26], perm[25], perm[24], "\n")
-
-
-# 2x2 brute force:
-def coord_co(*perms):
-    perm = corners(mult(*perms))
-    coord_or = 0
-    exp = 729
+def g2_corner_coordinate(*perms):
+    perm = corners(m.mult(*perms))
+    coordinate = 0
+    exp = 1
     for element in ['u1', 'u3', 'u5', 'u7', 'd1', 'd3', 'd5']:
         if perm.index(element) in [0, 1, 2, 3, 20, 21, 22, 23]:
-            exp /= 3
+            exp *= 3
         elif perm.index(element) in [4, 6, 8, 10, 12, 14, 16, 18]:
-            coord_or += exp
-            exp /= 3
+            coordinate += exp
+            exp *= 3
         else:
-            coord_or += exp * 2
-            exp /= 3
-
-    coord_perm = 0
-    # find order of cubies
-    perm_rp = corners(inv(*perms))
-    order = []
-    perm_reduced = []
-    for num in [0, 1, 2, 3, 20, 21, 22, 23]:
-        perm_reduced.append(perm_rp[num])
-
-    for facelet in perm_reduced:
-        for cubie in cubies:
-            if facelet in cubie:
-                order.append(cubie[0])
-    # define natural order
-    order_nat = ['u1', 'u3', 'u5', 'u7', 'd1', 'd3', 'd5', 'd7']
-    test = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    i = 1
-    j = 0
-    base = 1
-    while i < 8:
-        while j < i:
-            if order_nat.index(order[j]) > order_nat.index(order[i]):  # find facelets of higher order left of facelet
-                coord_perm += 1 * base
-                test[i] += 1
-            j += 1
-        j = 0
-        i += 1
-        base *= i
-    return coord_or, coord_perm
+            coordinate += exp * 2
+            exp *= 3
+    return coordinate
 
 
-def lal():
-    corners_lookup = []
-    i = 0
-    j = 0
-    while i < 37321:
-        corners_lookup.append([])
-        while j < 2186:
-            corners_lookup[i].append([])
-            j += 1
-        i += 1
-        j = 0
-        print(i)
-    print("success")
-    print(corners_lookup)
-    print(len(corners_lookup))
-    for element in corners_lookup:
-        print(len(element))
+def g1_coordinate(perm):
+    result = ""
+    for edge in p.edges(perm):
+        if edge in p.edges_solved:
+            result += "0"
+        else:
+            result += "1"
+    return g1.coordinate(result)
 
 
-lal()
+def g2_coordinate(perm):
+    result = ""
+    for corner in p.corners(perm):
+        if corner in p.corners_solved:
+            result += "0"
+        elif p.corner_rotation(corner) in p.corners(perm):
+            result += "1"
+        else:
+            result += "2"
+    transform = [0, 1, 2, 3, 8, 9, 10, 11, 4, 5, 6, 7]
+    edges_rearranged = []
+    for index in transform:
+        edges_rearranged.append(p.edges(perm)[index])
+    for edge in edges_rearranged:
+        if edge in [('f', 'r'), ('f', 'l'), ('b', 'l'), ('b', 'r')] or p.flip(edge) in [('f', 'r'), ('f', 'l'), ('b', 'l'), ('b', 'r')]:
+            result += "1"
+        else:
+            result += "0"
+    return g2.coordinate(result)
+
+
+def g3_coordinate(perm):
+    result = ""
+    for corner in p.corners(perm):
+        if corner in [('u', 'l', 'b'), ('u', 'r', 'f'), ('d', 'l', 'f'), ('d', 'r', 'b')]:
+            result += "0"
+        else:
+            result += "1"
+    # order found in gen_g3
+    transform = [0, 1, 2, 3, 8, 9, 10, 11, 4, 5, 6, 7]
+    edges_transformed = []
+    for index in transform:
+        edges_transformed.append(p.edges(perm)[index])
+
+    for edge in edges_transformed:
+        if edge in [('u', 'r'), ('u', 'l'), ('d', 'r'), ('d', 'l')]:
+            result += "1"
+        elif edge in [('f', 'r'), ('f', 'l'), ('b', 'l'), ('b', 'r')]:
+            result += str([('f', 'r'), ('f', 'l'), ('b', 'l'), ('b', 'r')].index(edge))
+        else:
+            result += "0"
+    return g3.coordinate(result)
+
+
+def g4_coordinate(perm):
+    result = ""
+    cycle1 = []
+    cycle2 = []
+    for index in [0, 2, 4, 6]:
+        cycle1.append(p.corners(perm)[index])
+        cycle2.append(p.corners(perm)[index + 1])
+    cycle_m = []
+    for index in [0, 2, 8, 10]:
+        cycle_m.append(p.edges(perm)[index])
+    cycle_s = []
+    for index in [3, 1, 9, 11]:
+        cycle_s.append(p.edges(perm)[index])
+    cycle_e = []
+    for index in [4, 5, 6, 7]:
+        cycle_e.append(p.edges(perm)[index])
+    for cycle in [cycle1, cycle2, cycle_e, cycle_s, cycle_m]:
+        print(cycle)
+        for piece in cycle:
+            for lists in p.piece_index_g4:
+                if piece in lists:
+                    result += str(p.piece_index_g4.index(lists))
+    print(g4.coordinate(result), result)
+    return g4.coordinate(result)
+
+
+# read all lines
+g1_file = open("lookup_g1", "r")
+g2_file = open("lookup_g2", "r")
+g3_file = open("lookup_g3", "r")
+g4_file = open("lookup_g4", "r")
+
+g1_table = g1_file.readlines()
+g2_table = g2_file.readlines()
+g3_table = g3_file.readlines()
+g4_table = g4_file.readlines()
+
+g1_file.close()
+g2_file.close()
+g3_file.close()
+g4_file.close()
+move_list = []
+
+
+def lookup_moves(table, coordinate):
+    result = []
+    move_curr = ""
+    if coordinate == 0:
+        return []
+    if int(table[coordinate][0]) not in range(10):
+        return []
+    for index in range(int(len(table[coordinate])) - 1):
+        if table[coordinate][index] != " ":
+            move_curr += table[coordinate][index]
+        else:
+            result.append(int(move_curr))
+            move_curr = ""
+    return result
+
+
+# input perm in facelet notation
+input_perm = m.apply(move.D2, move.B2, move.F2, move.R2, move.U2, move.L2, move.U2, move.B2, move.L2, move.R2)
+# solution is a list of ints
+solution_g1 = move.invert(lookup_moves(g1_table, g1_coordinate(input_perm)))
+if solution_g1:
+    print(solution_g1)
+# bring input  to g1
+for move_index in solution_g1:
+    input_perm = m.apply_single(input_perm, move.moves[move_index])
+
+
+solution_g2 = move.invert(move.translate(lookup_moves(g2_table, g2_coordinate(input_perm)), move.moves_g2))
+if solution_g2:
+    print(solution_g2)
+
+# bring input to g2:
+for move_index in solution_g2:
+    input_perm = m.apply_single(input_perm, move.moves[move_index])
+
+
+solution_g3 = move.invert(move.translate(lookup_moves(g3_table, g3_coordinate(input_perm)), move.moves_g3))
+if solution_g3:
+    print(solution_g3)
+
+# bring input to g3:
+for move_index in solution_g3:
+    input_perm = m.apply_single(input_perm, move.moves[move_index])
+
+solution_g4 = move.invert(move.translate(lookup_moves(g4_table, g4_coordinate(input_perm)), move.moves_g4))
+if solution_g4:
+    print(solution_g4)
+# bring input to g4:
+for move_index in solution_g4:
+    input_perm = m.apply_single(input_perm, move.moves[move_index])
+
+# check if solution is correct
+if not input_perm == move.identity:
+    print("Something went wrong")
+
+solution = solution_g1 + solution_g2 + solution_g3 + solution_g4
+print(move.moves_string(solution))
+print(lookup_moves(g4_table, 172573))
