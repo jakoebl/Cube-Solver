@@ -1,6 +1,7 @@
 import math
 import g4_corners
 import g4_edges
+import move_tables as m
 # order of cycles: UBL UBR E S M
 R2 = (0, 3, 2, 1, 6, 5, 4, 7, 11, 9, 10, 8, 12, 14, 13, 15, 16, 17, 18, 19)
 
@@ -20,20 +21,6 @@ perm_lookup = ['0123', '1023', '0213', '2013', '1203', '2103', '0132', '1032', '
                '0231', '2031', '0321', '3021', '2301', '3201', '1230', '2130', '1320', '3120', '2310', '3210']
 
 
-def corner_coordinate_from_string(string):
-    return g4_corners.lookup.index(string[0] + string[1] + string[2] + string[3] + string[4] + string[5] + string[6] + string[7])
-
-
-def edge_coordinate_from_string(string):
-    result = g4_edges.lookup.index(string[12] + string[13] + string[14] + string[15] + string[16] + string[17])
-    result += 288 * perm_lookup.index(string[8] + string[9] + string[10] + string[11])
-    return result
-
-
-def coordinate(string):
-    return corner_coordinate_from_string(string) + 96 * edge_coordinate_from_string(string)
-
-
 def move(string, move):
     result = ""
     for element in move:
@@ -43,7 +30,7 @@ def move(string, move):
 
 def get_moves(string):
     result = []
-    for element in moves:
+    for element in m.moves_g4:
         result.append(move(string, element))
     return result
 
@@ -56,7 +43,7 @@ def is_new(pos, distribution):
 
 
 def gen_lookup_g4():
-    dist = [{'01230123012301230123'}, {'10231023012310231023', '02130213102301230213', '21030321021331200123', '31203120013201233120', '03212103312002130123', '01320132012301320132'}]
+    dist = [{'uuuuuuuuffffffffllllllllbbbbbbbbrrrrrrrrdddddddd'}, {"uuuuuuuubbbfffffrrrlllllfffbbbbblllrrrrrdddddddd", "uuuuddduffffffffllrrrlllbbbbbbbblrrrrrlluuuddddd", "duuuuuddbfffffbbllllllllbbfffbbbrrrrrrrruddddduu", "ddduuuuuffffffffrlllllrrbbbbbbbbrrlllrrrdddduuud", "uuddduuuffbbbfffllllllllfbbbbbffrrrrrrrrdduuuddd", "uuuuuuuuffffbbbfllllrrrlbbbbfffbrrrrlllrdddddddd"}]
     while dist[-1]:  # While latest set not empty
         print(len(dist[-1]))  # Shows distribution
         dist.append(set())
@@ -64,28 +51,31 @@ def gen_lookup_g4():
             for subpos in get_moves(pos):
                 if is_new(subpos, dist):
                     dist[-1].add(subpos)
-                    temp = []
-                    for index in range(len(lookup_g4[coordinate(pos)])):
-                        temp.append(lookup_g4[coordinate(pos)][index])
-                    temp.append(get_moves(pos).index(subpos))
-                    lookup_g4[coordinate(subpos)] = temp
+                    lookup_string.append(subpos)
+                    lookup_moves.append(lookup_moves[lookup_string.index(pos)] + [get_moves(pos).index(subpos)])
 
 
-def write_lookup(file):
-    for number in range(663552):
-        lookup_g4.append("")
-    for mov in get_moves("01230123012301230123"):
-        lookup_g4[coordinate(mov)] = [get_moves("01230123012301230123").index(mov)]
+def write_lookup(file_moves, file_strings):
     gen_lookup_g4()
-    table_g4 = open(file, "w")
-    for lists in lookup_g4:
+
+    moves_g4 = open(file_moves, "w")
+    strings_g4 = open(file_strings, "w")
+
+    for lists in lookup_moves:
         for element in lists:
-            table_g4.write(str(element))
-            table_g4.write(" ")
-        table_g4.write("\n")
-    table_g4.close()
+            moves_g4.write(str(element))
+            moves_g4.write(" ")
+        moves_g4.write("\n")
+
+    for string in lookup_string:
+        strings_g4.write(string)
+        strings_g4.write("\n")
+
+    moves_g4.close()
+    strings_g4.close()
 
 
 lookup_g4 = []
-print(coordinate("20312031013231200321"))
-print(coordinate("02312013013230210312"))
+lookup_moves = [[], [0], [1], [2], [3], [4], [5]]
+lookup_string = ['uuuuuuuuffffffffllllllllbbbbbbbbrrrrrrrrdddddddd', "uuuuuuuubbbfffffrrrlllllfffbbbbblllrrrrrdddddddd", "uuuuddduffffffffllrrrlllbbbbbbbblrrrrrlluuuddddd", "duuuuuddbfffffbbllllllllbbfffbbbrrrrrrrruddddduu", "ddduuuuuffffffffrlllllrrbbbbbbbbrrlllrrrdddduuud", "uuddduuuffbbbfffllllllllfbbbbbffrrrrrrrrdduuuddd", "uuuuuuuuffffbbbfllllrrrlbbbbfffbrrrrlllrdddddddd"]
+write_lookup("moves_g4", "strings_g4")

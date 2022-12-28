@@ -133,7 +133,7 @@ def g4_coordinate(perm):
 g1_file = open("lookup_g1", "r")
 g2_file = open("lookup_g2", "r")
 g3_file = open("lookup_g3", "r")
-g4_file = open("lookup_g4", "r")
+g4_file = open("moves_g4", "r")
 
 g1_table = g1_file.readlines()
 g2_table = g2_file.readlines()
@@ -163,6 +163,11 @@ def lookup_moves(table, coordinate):
     return result
 
 
+for mov in move.moves_g4:
+    res = ""
+    for element in m.apply_single("uuuuuuuuffffffffllllllllbbbbbbbbrrrrrrrrdddddddd", mov):
+        res += element
+    print(res)
 # input perm in facelet notation
 input_perm = m.apply(move.D2, move.B2, move.F2, move.R2, move.U2, move.L2, move.U2, move.B2, move.L2, move.R2)
 # solution is a list of ints
