@@ -78,4 +78,4 @@ def write_lookup(file_moves, file_strings):
 lookup_g4 = []
 lookup_moves = [[], [0], [1], [2], [3], [4], [5]]
 lookup_string = ['uuuuuuuuffffffffllllllllbbbbbbbbrrrrrrrrdddddddd', "uuuuuuuubbbfffffrrrlllllfffbbbbblllrrrrrdddddddd", "uuuuddduffffffffllrrrlllbbbbbbbblrrrrrlluuuddddd", "duuuuuddbfffffbbllllllllbbfffbbbrrrrrrrruddddduu", "ddduuuuuffffffffrlllllrrbbbbbbbbrrlllrrrdddduuud", "uuddduuuffbbbfffllllllllfbbbbbffrrrrrrrrdduuuddd", "uuuuuuuuffffbbbfllllrrrlbbbbfffbrrrrlllrdddddddd"]
-write_lookup("moves_g4", "strings_g4")
+
