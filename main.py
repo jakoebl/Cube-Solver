@@ -100,6 +100,7 @@ def g3_coordinate(perm):
             result += str([('f', 'r'), ('f', 'l'), ('b', 'l'), ('b', 'r')].index(edge))
         else:
             result += "0"
+    print(result)
     return g3.coordinate(result)
 
 
@@ -175,7 +176,7 @@ def lookup_moves(table, coordinate):
 
 
 # input perm in facelet notation
-input_perm = m.apply(move.D2, move.B2, move.F2, move.L2, move.U2, move.L2, move.U2, move.B2, move.L2, move.R2)
+input_perm = m.apply(move.D2, move.B2, move.F, move.L2, move.U2, move.L2, move.U2, move.B2, move.L2, move.R2)
 # solution is a list of ints
 solution_g1 = move.invert(lookup_moves(g1_table, g1_coordinate(input_perm)))
 if solution_g1:
@@ -202,7 +203,7 @@ if solution_g3:
 for move_index in solution_g3:
     input_perm = m.apply_single(input_perm, move.moves[move_index])
 
-solution_g4 = move.invert(move.translate(lookup_moves(g4_moves, g4_strings.index(string_from_perm(input_perm))), move.moves_g4))
+solution_g4 = move.invert(move.translate(lookup_moves(g4_moves, g4_strings.index(string_from_perm(input_perm) + "\n")), move.moves_g4))
 if solution_g4:
     print(solution_g4)
 # bring input to g4:
