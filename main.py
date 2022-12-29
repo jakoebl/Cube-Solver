@@ -5,6 +5,7 @@ import generate_g4 as g4
 import move_tables as move
 import facelet_moves as m
 import facelet_manipulation_stuff as p
+import random
 identity = ['u', 'u', 'u', 'u', 'u', 'u', 'u', 'u',
             'f', 'f', 'f', 'f', 'f', 'f', 'f', 'f',
             'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l',
@@ -189,10 +190,7 @@ def solve(input_perm):
 
     # check if solution is correct
     if not input_perm == move.identity:
-        print("Something went wrong")
+        return "ERROR"
 
     solution = solution_g1 + solution_g2 + solution_g3 + solution_g4
     print(move.moves_string(solution))
-
-
-solve(m.apply(move.F, move.B2, move.F2, move.L2, move.U2, move.L2, move.U2, move.B2, move.L2, move.R2, move.B2, move.F2, move.L2, move.U2))
