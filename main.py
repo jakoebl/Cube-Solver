@@ -13,42 +13,6 @@ identity = ['u', 'u', 'u', 'u', 'u', 'u', 'u', 'u',
             'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd']
 
 
-def corners(*perms):
-    perm = m.mult(*perms)
-    result = []
-    i = 0
-    while i < 48:
-        result.append(perm[i])
-        i += 2
-    return result
-
-
-def edges(*perms):
-    perm = m.mult(*perms)
-    result = []
-    i = 1
-    while i < 48:
-        result.append(perm[i])
-        i += 2
-    return result
-
-
-def g2_corner_coordinate(*perms):
-    perm = corners(m.mult(*perms))
-    coordinate = 0
-    exp = 1
-    for element in ['u1', 'u3', 'u5', 'u7', 'd1', 'd3', 'd5']:
-        if perm.index(element) in [0, 1, 2, 3, 20, 21, 22, 23]:
-            exp *= 3
-        elif perm.index(element) in [4, 6, 8, 10, 12, 14, 16, 18]:
-            coordinate += exp
-            exp *= 3
-        else:
-            coordinate += exp * 2
-            exp *= 3
-    return coordinate
-
-
 def g1_coordinate(perm):
     result = ""
     for edge in p.edges(perm):
@@ -64,10 +28,10 @@ def g2_coordinate(perm):
     for corner in p.corners(perm):
         if corner in p.corners_solved:
             result += "0"
-        elif p.corner_rotation(corner) in p.corners(perm):
-            result += "1"
-        else:
+        elif p.corner_clockwise_rotation(corner) in p.corners_solved:
             result += "2"
+        else:
+            result += "1"
     transform = [0, 1, 2, 3, 8, 9, 10, 11, 4, 5, 6, 7]
     edges_rearranged = []
     for index in transform:
@@ -100,7 +64,6 @@ def g3_coordinate(perm):
             result += str([('f', 'r'), ('f', 'l'), ('b', 'l'), ('b', 'r')].index(edge))
         else:
             result += "0"
-    print(result)
     return g3.coordinate(result)
 
 
@@ -148,7 +111,11 @@ g1_table = g1_file.readlines()
 g2_table = g2_file.readlines()
 g3_table = g3_file.readlines()
 g4_moves = g4_move.readlines()
-g4_strings = g4_string.readlines()
+g4_strings_temp = g4_string.readlines()
+g4_strings = []
+
+for line in g4_strings_temp:
+    g4_strings.append(line.strip())
 
 g1_file.close()
 g2_file.close()
@@ -164,7 +131,7 @@ def lookup_moves(table, coordinate):
     move_curr = ""
     if coordinate == 0:
         return []
-    if int(table[coordinate][0]) not in range(10):
+    if "s" in table[coordinate]:
         return []
     for index in range(int(len(table[coordinate])) - 1):
         if table[coordinate][index] != " ":
@@ -175,44 +142,57 @@ def lookup_moves(table, coordinate):
     return result
 
 
-# input perm in facelet notation
-input_perm = m.apply(move.D2, move.B2, move.F, move.L2, move.U2, move.L2, move.U2, move.B2, move.L2, move.R2)
-# solution is a list of ints
-solution_g1 = move.invert(lookup_moves(g1_table, g1_coordinate(input_perm)))
-if solution_g1:
-    print(solution_g1)
-# bring input  to g1
-for move_index in solution_g1:
-    input_perm = m.apply_single(input_perm, move.moves[move_index])
+def index_string(table, string):
+    return table.index(string)
 
 
-solution_g2 = move.invert(move.translate(lookup_moves(g2_table, g2_coordinate(input_perm)), move.moves_g2))
-if solution_g2:
-    print(solution_g2)
+def solve(input_perm):
+    # solution is a list of ints
+    solution_g1 = []
+    solution_g2 = []
+    solution_g3 = []
+    solution_g4 = []
 
-# bring input to g2:
-for move_index in solution_g2:
-    input_perm = m.apply_single(input_perm, move.moves[move_index])
+    if g1_coordinate(input_perm) != 0:
+        solution_g1 = move.invert(lookup_moves(g1_table, g1_coordinate(input_perm)))
+        if solution_g1:
+            print(solution_g1)
+        # bring input  to g1
+        for move_index in solution_g1:
+            input_perm = m.apply_single(input_perm, move.moves[move_index])
+
+    if g2_coordinate(input_perm) != 0:
+        solution_g2 = move.invert(move.translate(lookup_moves(g2_table, g2_coordinate(input_perm)), move.moves_g2))
+        if solution_g2:
+            print(solution_g2)
+
+        # bring input to g2:
+        for move_index in solution_g2:
+            input_perm = m.apply_single(input_perm, move.moves[move_index])
+
+    if g3_coordinate(input_perm) != 0:
+        solution_g3 = move.invert(move.translate(lookup_moves(g3_table, g3_coordinate(input_perm)), move.moves_g3))
+        if solution_g3:
+            print(solution_g3)
+
+        # bring input to g3:
+        for move_index in solution_g3:
+            input_perm = m.apply_single(input_perm, move.moves[move_index])
+
+    if input_perm != 'uuuuuuuuffffffffllllllllbbbbbbbbrrrrrrrrdddddddd':
+        solution_g4 = move.invert(move.translate(lookup_moves(g4_moves, index_string(g4_strings, string_from_perm(input_perm))), move.moves_g4))
+        if solution_g4:
+            print(solution_g4)
+        # bring input to g4:
+        for move_index in solution_g4:
+            input_perm = m.apply_single(input_perm, move.moves[move_index])
+
+    # check if solution is correct
+    if not input_perm == move.identity:
+        print("Something went wrong")
+
+    solution = solution_g1 + solution_g2 + solution_g3 + solution_g4
+    print(move.moves_string(solution))
 
 
-solution_g3 = move.invert(move.translate(lookup_moves(g3_table, g3_coordinate(input_perm)), move.moves_g3))
-if solution_g3:
-    print(solution_g3)
-
-# bring input to g3:
-for move_index in solution_g3:
-    input_perm = m.apply_single(input_perm, move.moves[move_index])
-
-solution_g4 = move.invert(move.translate(lookup_moves(g4_moves, g4_strings.index(string_from_perm(input_perm) + "\n")), move.moves_g4))
-if solution_g4:
-    print(solution_g4)
-# bring input to g4:
-for move_index in solution_g4:
-    input_perm = m.apply_single(input_perm, move.moves[move_index])
-
-# check if solution is correct
-if not input_perm == move.identity:
-    print("Something went wrong")
-
-solution = solution_g1 + solution_g2 + solution_g3 + solution_g4
-print(move.moves_string(solution))
+solve(m.apply(move.F, move.B2, move.F2, move.L2, move.U2, move.L2, move.U2, move.B2, move.L2, move.R2, move.B2, move.F2, move.L2, move.U2))

@@ -43,7 +43,7 @@ DFL = ('d', 'l', 'f')
 DFR = ('d', 'f', 'r')
 
 
-def corner_rotation(corner):
+def corner_clockwise_rotation(corner):
     return tuple([corner[2], corner[0], corner[1]])
 
 
