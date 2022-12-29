@@ -195,4 +195,4 @@ def solve(input_perm):
     print(move.moves_string(solution))
 
 
-solve(m.apply(move.F, move.B2, move.F2, move.L2, move.U2, move.L2, move.U2, move.B2, move.L2, move.R2, move.B2, move.F2, move.L2, move.U2))
+solve(m.apply(move.F, move.R, move.F2, move.L2, move.U2, move.L2, move.U2, move.B2, move.L2, move.R2, move.B2, move.F2, move.L2, move.U2))
