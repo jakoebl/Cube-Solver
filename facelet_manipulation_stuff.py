@@ -57,6 +57,7 @@ corners_list = [UBL, UBR, UFR, UFL, DFL, DFR, DBR, DBL]
 
 corners_solved = [('u', 'l', 'b'), ('u', 'b', 'r'), ('u', 'r', 'f'), ('u', 'f', 'l'), ('d', 'l', 'f'), ('d', 'f', 'r'), ('d', 'r', 'b'), ('d', 'b', 'l')]
 
+corners_g3 = [('u', 'l', 'b'), ('u', 'b', 'r'), ('d', 'l', 'f'), ('d', 'f', 'r'), ('u', 'r', 'f'), ('u', 'f', 'l'), ('d', 'r', 'b'), ('d', 'b', 'l')]
 
 # edges
 def flip(edge):
@@ -72,7 +73,11 @@ def edges(perm):
 edges_solved = [('u', 'b'), ('u', 'r'), ('u', 'f'), ('u', 'l'), ('f', 'r'), ('f', 'l'),
                 ('b', 'l'), ('b', 'r'), ('d', 'f'), ('d', 'r'), ('d', 'b'), ('d', 'l')]
 
+m_slice = [('u', 'b'), ('u', 'f'), ('d', 'f'), ('d', 'b')]
 
+s_slice = [('u', 'r'), ('u', 'l'), ('d', 'r'), ('d', 'l')]
+
+# whole cube
 piece_index_g4 = ([('u', 'b'), ('u', 'r'), ('u', 'l', 'b'), ('f', 'r'), ('u', 'b', 'r')],
                   [('u', 'f'), ('u', 'l'), ('u', 'r', 'f'), ('f', 'l'), ('u', 'f', 'l')],
                   [('d', 'f'), ('d', 'r'), ('d', 'l', 'f'), ('b', 'l'), ('d', 'f', 'r')],
@@ -81,15 +86,18 @@ piece_index_g4 = ([('u', 'b'), ('u', 'r'), ('u', 'l', 'b'), ('f', 'r'), ('u', 'b
 
 # pretty print is in "replaced by" notation
 def pretty_print(perm):
-    print("        ",                   perm[0], perm[1],   perm[2], "\n" +
-          "        ",                   perm[7], "U ",      perm[3], "\n" +
-          "        ",                   perm[6], perm[5],   perm[4], "\n" +
+    print("     ",                   perm[0], perm[1],   perm[2], "\n" +
+          "     ",                   perm[7], "U",       perm[3], "\n" +
+          "     ",                   perm[6], perm[5],   perm[4], "\n" +
           perm[16], perm[17], perm[18], perm[8], perm[9],   perm[10], perm[32], perm[33], perm[34], "\n" +
-          perm[23], "L ",     perm[19], perm[15], "F ",     perm[11], perm[39], "R ",     perm[35], "\n" +
+          perm[23], "L",      perm[19], perm[15], "F",      perm[11], perm[39], "R",      perm[35], "\n" +
           perm[22], perm[21], perm[20], perm[14], perm[13], perm[12], perm[38], perm[37], perm[36], "\n" +
-          "        ",                   perm[40], perm[41], perm[42], "\n" +
-          "        ",                   perm[47], "D ",     perm[43], "\n" +
-          "        ",                   perm[46], perm[45], perm[44], "\n" +
-          "        ",                   perm[28], perm[29], perm[30], "\n" +
-          "        ",                   perm[27], "B ",     perm[31], "\n" +
-          "        ",                   perm[26], perm[25], perm[24], "\n")
+          "     ",                   perm[40], perm[41], perm[42], "\n" +
+          "     ",                   perm[47], "D",      perm[43], "\n" +
+          "     ",                   perm[46], perm[45], perm[44], "\n" +
+          "     ",                   perm[28], perm[29], perm[30], "\n" +
+          "     ",                   perm[27], "B",      perm[31], "\n" +
+          "     ",                   perm[26], perm[25], perm[24], "\n")
+
+
+pretty_print('uuuuuuuuzfzzzfzzrrrrrrrrzbzzzbzzrrrrrrrruuuuuuuu0')

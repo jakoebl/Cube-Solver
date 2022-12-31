@@ -1,6 +1,6 @@
 import generate_g1 as g1
 import generate_g2 as g2
-import generate_g3 as g3
+import generate_g3_old as g3
 import generate_g4 as g4
 import move_tables as move
 import facelet_moves as m
@@ -104,7 +104,7 @@ def string_from_perm(perm):
 # read all lines
 g1_file = open("lookup_g1", "r")
 g2_file = open("lookup_g2", "r")
-g3_file = open("lookup_g3", "r")
+g3_file = open("moves_g3", "r")
 g4_move = open("moves_g4", "r")
 g4_string = open("strings_g4", "r")
 
