@@ -43,9 +43,15 @@ def coordinate(string):
             edge_string += "1"
 
     corners = p.corners(string)
-    corner_string = ""
-    for corner in corners:
-        corner_string += str(p.corners_g3.index(corner) % 4)
+    corner_string_list = [0, 0, 1, 1, 2, 2, 3, 3]
+    index = 0
+    while index < 4:
+        if corner != "x":
+            corner_string_list[index] = str(index)
+            corner_string_list[corners.index(p.corners_g3[(index + 4) % 8])] = index
+            corners.remove(corner)
+            corners.remove(p.corners_g3[(index + 4) % 8])
+            index += 1
 
     result = corner_parity(corners)
     result += 2 * generate_8C4.lookup.index(edge_string)
@@ -71,7 +77,25 @@ def gen_lookup():
     print(len(dist) - 2)
 
 
+def corner_coord(string):
+    corners = p.corners(string)
+    print(corners)
+    corner_string_list = [0, 0, 1, 1, 2, 2, 3, 3]
+    index = 0
+    while index < 4:
+        if corners[index] != "x":
+            corner_string_list[index] = str(index)
+            corner_string_list[corners.index(p.corners_g3[(index + 4) % 8])] = index
+            corners.remove(corners[index])
+            print(corners[index])
+            corners.remove(p.corners_g3[(index + 4) % 8])
+            index += 1
+            print(corners)
+    print(corner_string_list)
+
+
 lookup_moves = []
 lookup_strings = []
-gen_lookup()
 
+
+corner_coord('uuuuuuuuffffffffllllllllbbbbbbbbrrrrrrrrdddddddd')
