@@ -25,6 +25,35 @@ def move(string, move):  # coordinate int
     result = ""
     for element in move:
         result += string[element]
+    if move in [U_coord, Up_coord, D_coord, Dp_coord]:
+        if string[20] == "0":
+            result += "1"
+        else:
+            result += "0"
+    else:
+        result += string[20]
+    result_ordered = order_corners(string)
+    for index in range(8, 21):
+        result_ordered += result[index]
+
+    return result_ordered
+
+
+def order_corners(string):
+    corner_list = []
+    for index in range(8):
+        corner_list.append(string[index])
+    ordered_list = []
+    for i in range(4):
+        ordered_list.append(corner_list.index(str(i)))
+    ordered_list.sort()
+    for num in range(4):
+        ordered_list[num] = corner_list[ordered_list[num]]
+    for n in range(8):
+        corner_list[n] = ordered_list.index(corner_list[n])
+    result = ""
+    for element in corner_list:
+        result += str(element)
     return result
 
 
@@ -61,24 +90,18 @@ def gen_empty_lookup():
         lookup[coordinate(element)] = [get_moves("01010101010101010123").index(element)]
     lookup[0] = ["solved"]
 
+
 def gen_lookup():
-    dist = [{"01010101010101010123"}, {'01010101010101013120', '01010101010101010132', '01010101010101010213', '01010101010101011023', '10100101101001010123', '01011010010110100123'}]
-    gen_empty_lookup()
+    dist = [{"0101232301010101xxxx0"}, {'0101232310100101xxxx1', '0101232301011010xxxx1'}]
     while dist[-1]:  # While latest set not empty
         print(len(dist[-1]))  # Shows distribution
         dist.append(set())
         for pos in dist[-2]:
             for subpos in get_moves(pos):
-                if not lookup[coordinate(subpos)] and is_new(subpos, dist):
+                if is_new(subpos, dist):
                     dist[-1].add(subpos)
-                    temp = []
-                    for index in range(len(lookup[coordinate(pos)])):
-                        temp.append(lookup[coordinate(pos)][index])
-                    temp.append(get_moves(pos).index(subpos))
-                    lookup[coordinate(subpos)] = temp
-    for element in dist:
-        if "01010101010101010123" in element:
-            print("uh oh")
+                    lookup_strings.append(subpos)
+                    lookup_moves.append(lookup_moves[lookup_strings.index(pos)] + [get_moves(pos).index(subpos)])
 
 
 def write_lookup(file):
@@ -92,4 +115,6 @@ def write_lookup(file):
     table_g3.close()
 
 
-lookup = []
+lookup_moves = [[], [0], [7]]
+lookup_strings = ["0101232301010101xxxx0", '0101232310100101xxxx1', '0101232301011010xxxx1']
+gen_lookup()
