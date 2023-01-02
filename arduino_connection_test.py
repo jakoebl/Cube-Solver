@@ -1,7 +1,3 @@
-import serial
+lis = [0]
 
-
-arduino = serial.Serial(port="com3", baudrate=9600, timeout=.1)
-
-arduino.write(bytes("F\r", "utf8"))
-
+print(lis[-2])
