@@ -53,6 +53,14 @@ def corners(perm):
             (perm[44], perm[36], perm[30]), (perm[46], perm[28], perm[22])]
 
 
+def corner_parity(corners):
+    result = 0
+    for i in range(0, 7):
+        for j in range(i + 1, 8):
+            result ^= bool(corners_solved.index(corners[i]) > corners_solved.index(corners[j]))
+    return result
+
+
 corners_list = [UBL, UBR, UFR, UFL, DFL, DFR, DBR, DBL]
 
 corners_solved = [('u', 'l', 'b'), ('u', 'b', 'r'), ('u', 'r', 'f'), ('u', 'f', 'l'), ('d', 'l', 'f'), ('d', 'f', 'r'), ('d', 'r', 'b'), ('d', 'b', 'l')]
@@ -98,6 +106,3 @@ def pretty_print(perm):
           "     ",                   perm[28], perm[29], perm[30], "\n" +
           "     ",                   perm[27], "B",      perm[31], "\n" +
           "     ",                   perm[26], perm[25], perm[24], "\n")
-
-
-pretty_print('uuuuuuuuzfzzzfzzrrrrrrrrzbzzzbzzrrrrrrrruuuuuuuu0')
