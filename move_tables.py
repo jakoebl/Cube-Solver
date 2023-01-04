@@ -42,7 +42,11 @@ D2 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 28, 29, 30, 15, 16, 17, 18, 19, 36, 
 
 # Lists
 moves = [U, Up, U2, F, Fp, F2, L, Lp, L2, B, Bp, B2, R, Rp, R2, D, Dp, D2]
+
 move_string = ["U", "Up", "U2", "F", "Fp", "F2", "L", "Lp", "L2", "B", "Bp", "B2", "R", "Rp", "R2", "D", "Dp", "D2"]
+
+move_arduino = ["U", "u", "V", "F", "f", "G", "L", "l", "M", "B", "b", "C", "R", "r", "S", "D", "d", "E"]
+
 moves_g2 = [U, Up, U2, F2, L, Lp, L2, B2, R, Rp, R2, D, Dp, D2]
 
 moves_g3 = [U, Up, U2, F2, L2, B2, R2, D, Dp, D2]
@@ -71,3 +75,41 @@ def moves_string(moves):
     for move in moves:
         result += move_string[move] + " "
     return result
+
+
+def moves_arduino(moves):
+    result = ""
+    for element in moves:
+        result += move_arduino[element]
+    return result
+
+
+side_U = [[], 0, 2, 1]
+side_F = [[], 3, 5, 4]
+side_L = [[], 6, 8, 7]
+side_B = [[], 9, 11, 10]
+side_R = [[], 12, 14, 13]
+side_D = [[], 15, 17, 16]
+
+moves_by_side = (side_U, side_F, side_L, side_B, side_R, side_D)
+
+
+def cancel(list1, list2):
+    done = False
+    while not done:
+        if not list1:
+            return list2
+        if not list2:
+            return list1
+        for element in moves_by_side:
+            if list1[-1] in element and list2[0] in element:
+                if (element.index(list1[-1]) + element.index(list2[0])) % 4 == 0:
+                    list1.pop()
+                else:
+                    list1[-1] = element[(element.index(list1[-1]) + element.index(list2[0])) % 4]
+                list2.pop(0)
+                done = False
+                break
+            else:
+                done = True
+    return list1 + list2
