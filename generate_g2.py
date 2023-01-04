@@ -145,3 +145,5 @@ def write_lookup(file):
         table_g2.write("\n")
     table_g2.close()
 
+
+lookup_g2 = []

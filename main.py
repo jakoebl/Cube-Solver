@@ -1,8 +1,7 @@
 import generate_g1 as g1
 import generate_g2 as g2
-import move_tables as move
-import facelet_moves as m
-import facelet_manipulation_stuff as p
+import move_tables as m
+import piece_manipulation as p
 
 
 def g1_coordinate(perm):
@@ -124,39 +123,39 @@ def solve(input_perm):
     solution_g4 = []
 
     if g1_coordinate(input_perm) != 0:
-        solution_g1 = move.invert(lookup_moves(g1_table, g1_coordinate(input_perm)))
+        solution_g1 = m.invert(lookup_moves(g1_table, g1_coordinate(input_perm)))
 
         # bring input  to g1
         for move_index in solution_g1:
-            input_perm = m.apply_single(input_perm, move.moves[move_index])
+            input_perm = m.apply_single(input_perm, m.moves[move_index])
 
     if g2_coordinate(input_perm) != 0:
-        solution_g2 = move.invert(move.translate(lookup_moves(g2_table, g2_coordinate(input_perm)), move.moves_g2))
+        solution_g2 = m.invert(m.translate(lookup_moves(g2_table, g2_coordinate(input_perm)), m.moves_g2))
 
         # bring input to g2:
         for move_index in solution_g2:
-            input_perm = m.apply_single(input_perm, move.moves[move_index])
+            input_perm = m.apply_single(input_perm, m.moves[move_index])
 
     if index_string(g3_strings, g3_string(input_perm)) > 95:
-        solution_g3 = move.invert(move.translate(lookup_moves(g3_moves, index_string(g3_strings, g3_string(input_perm))), move.moves_g3))
+        solution_g3 = m.invert(m.translate(lookup_moves(g3_moves, index_string(g3_strings, g3_string(input_perm))), m.moves_g3))
 
         # bring input to g3:
         for move_index in solution_g3:
-            input_perm = m.apply_single(input_perm, move.moves[move_index])
+            input_perm = m.apply_single(input_perm, m.moves[move_index])
 
     if input_perm != 'uuuuuuuuffffffffllllllllbbbbbbbbrrrrrrrrdddddddd':
-        solution_g4 = move.invert(move.translate(lookup_moves(g4_moves, index_string(g4_strings, g4_string(input_perm))), move.moves_g4))
+        solution_g4 = m.invert(m.translate(lookup_moves(g4_moves, index_string(g4_strings, g4_string(input_perm))), m.moves_g4))
 
         # bring input to g4:
         for move_index in solution_g4:
-            input_perm = m.apply_single(input_perm, move.moves[move_index])
+            input_perm = m.apply_single(input_perm, m.moves[move_index])
 
     # check if solution is correct
-    if not input_perm == move.identity:
+    if not input_perm == m.identity:
         return "ERROR"
 
-    solution = move.cancel(move.cancel(move.cancel(solution_g1, solution_g2), solution_g3), solution_g4)
+    solution = m.cancel(m.cancel(m.cancel(solution_g1, solution_g2), solution_g3), solution_g4)
     return solution
 
 
-print(move.moves_string(solve(m.apply(move.F, move.R2, move.L, move.U2, move.D, move.B2, move.F, move.R, move.L2, move.F, move.D2, move.R2))))
+print(m.moves_string(solve(m.apply(m.F, m.R2, m.L, m.U2, m.D, m.B2, m.F, m.R, m.L2, m.F, m.D2, m.R2))))

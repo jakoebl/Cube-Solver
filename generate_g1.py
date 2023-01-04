@@ -127,3 +127,6 @@ def write_lookup(file):
             table_g1.write(" ")
         table_g1.write("\n")
     table_g1.close()
+
+
+lookup_g1 = []
