@@ -1,35 +1,6 @@
 import facelet_moves as m
 import move_tables as tables
-# Rotations
 
-x = ['b5', 'b6', 'b7', 'b8', 'b1', 'b2', 'b3', 'b4',
-     'u1', 'u2', 'u3', 'u4', 'u5', 'u6', 'u7', 'u8',
-     'l7', 'l8', 'l1', 'l2', 'l3', 'l4', 'l5', 'l6',
-     'd5', 'd6', 'd7', 'd8', 'd1', 'd2', 'd3', 'd4',
-     'r3', 'r4', 'r5', 'r6', 'r7', 'r8', 'r1', 'r2',
-     'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8']
-
-y = ['u3', 'u4', 'u5', 'u6', 'u7', 'u8', 'u1', 'u2',
-     'l1', 'l2', 'l3', 'l4', 'l5', 'l6', 'l7', 'l8',
-     'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'b8',
-     'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7', 'r8',
-     'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8',
-     'd7', 'd8', 'd1', 'd2', 'd3', 'd4', 'd5', 'd6']
-
-z = ['r3', 'r4', 'r5', 'r6', 'r7', 'r8', 'r1', 'r2',
-     'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f1', 'f2',
-     'u3', 'u4', 'u5', 'u6', 'u7', 'u8', 'u1', 'u2',
-     'b7', 'b8', 'b1', 'b2', 'b3', 'b4', 'b5', 'b6',
-     'd3', 'd4', 'd5', 'd6', 'd7', 'd8', 'd1', 'd2',
-     'l3', 'l4', 'l5', 'l6', 'l7', 'l8', 'l1', 'l2']
-
-
-corner_facelets = ['u1', 'u3', 'u5' 'u7',
-                   'f1', 'f3', 'f5', 'f7',
-                   'l1', 'l3', 'l5', 'l7',
-                   'b1', 'b3', 'b5', 'b7',
-                   'r1', 'r3', 'r5', 'r7',
-                   'd1', 'd3', 'd5', 'd7']
 
 # cubies
 
@@ -67,6 +38,7 @@ corners_solved = [('u', 'l', 'b'), ('u', 'b', 'r'), ('u', 'r', 'f'), ('u', 'f', 
 
 corners_g3 = [('u', 'l', 'b'), ('u', 'b', 'r'), ('d', 'l', 'f'), ('d', 'f', 'r'), ('u', 'r', 'f'), ('u', 'f', 'l'), ('d', 'r', 'b'), ('d', 'b', 'l')]
 
+
 # edges
 def flip(edge):
     return tuple([edge[1], edge[0]])
@@ -92,7 +64,6 @@ piece_index_g4 = ([('u', 'b'), ('u', 'r'), ('u', 'l', 'b'), ('f', 'r'), ('u', 'b
                   [('d', 'b'), ('d', 'l'), ('d', 'r', 'b'), ('b', 'r'), ('d', 'b', 'l')])
 
 
-# pretty print is in "replaced by" notation
 def pretty_print(perm):
     print("     ",                   perm[0], perm[1],   perm[2], "\n" +
           "     ",                   perm[7], "U",       perm[3], "\n" +

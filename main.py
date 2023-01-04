@@ -1,16 +1,8 @@
 import generate_g1 as g1
 import generate_g2 as g2
-import generate_g4 as g4
 import move_tables as move
 import facelet_moves as m
 import facelet_manipulation_stuff as p
-import random
-identity = ['u', 'u', 'u', 'u', 'u', 'u', 'u', 'u',
-            'f', 'f', 'f', 'f', 'f', 'f', 'f', 'f',
-            'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l',
-            'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b',
-            'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r',
-            'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd']
 
 
 def g1_coordinate(perm):
@@ -68,33 +60,7 @@ def g3_string(perm):
     return result
 
 
-def g4_coordinate(perm):
-    result = ""
-    cycle1 = []
-    cycle2 = []
-    for index in [0, 2, 4, 6]:
-        cycle1.append(p.corners(perm)[index])
-        cycle2.append(p.corners(perm)[index + 1])
-    cycle_m = []
-    for index in [0, 2, 8, 10]:
-        cycle_m.append(p.edges(perm)[index])
-    cycle_s = []
-    for index in [3, 1, 9, 11]:
-        cycle_s.append(p.edges(perm)[index])
-    cycle_e = []
-    for index in [4, 5, 6, 7]:
-        cycle_e.append(p.edges(perm)[index])
-    for cycle in [cycle1, cycle2, cycle_e, cycle_s, cycle_m]:
-        print(cycle)
-        for piece in cycle:
-            for lists in p.piece_index_g4:
-                if piece in lists:
-                    result += str(p.piece_index_g4.index(lists))
-    print(g4.coordinate(result), result)
-    return g4.coordinate(result)
-
-
-def string_from_perm(perm):
+def g4_string(perm):
     result = ""
     for element in perm:
         result += element
@@ -179,7 +145,7 @@ def solve(input_perm):
             input_perm = m.apply_single(input_perm, move.moves[move_index])
 
     if input_perm != 'uuuuuuuuffffffffllllllllbbbbbbbbrrrrrrrrdddddddd':
-        solution_g4 = move.invert(move.translate(lookup_moves(g4_moves, index_string(g4_strings, string_from_perm(input_perm))), move.moves_g4))
+        solution_g4 = move.invert(move.translate(lookup_moves(g4_moves, index_string(g4_strings, g4_string(input_perm))), move.moves_g4))
 
         # bring input to g4:
         for move_index in solution_g4:
@@ -189,6 +155,8 @@ def solve(input_perm):
     if not input_perm == move.identity:
         return "ERROR"
 
-    solution = solution_g1 + solution_g2 + solution_g3 + solution_g4
+    solution = move.cancel(move.cancel(move.cancel(solution_g1, solution_g2), solution_g3), solution_g4)
+    return solution
 
-    return len(solution)
+
+print(move.moves_arduino(solve(m.apply(move.F, move.R2, move.L, move.U2, move.D, move.B2, move.F, move.R, move.L2, move.F, move.D2, move.R2))))
