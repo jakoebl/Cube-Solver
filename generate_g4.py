@@ -1,6 +1,3 @@
-import math
-import g4_corners
-import g4_edges
 import move_tables as m
 # order of cycles: UBL UBR E S M
 R2 = (0, 3, 2, 1, 6, 5, 4, 7, 11, 9, 10, 8, 12, 14, 13, 15, 16, 17, 18, 19)
@@ -75,7 +72,6 @@ def write_lookup(file_moves, file_strings):
     strings_g4.close()
 
 
-lookup_g4 = []
 lookup_moves = [[], [0], [1], [2], [3], [4], [5]]
 lookup_string = ['uuuuuuuuffffffffllllllllbbbbbbbbrrrrrrrrdddddddd', "uuuuuuuubbbfffffrrrlllllfffbbbbblllrrrrrdddddddd", "uuuuddduffffffffllrrrlllbbbbbbbblrrrrrlluuuddddd", "duuuuuddbfffffbbllllllllbbfffbbbrrrrrrrruddddduu", "ddduuuuuffffffffrlllllrrbbbbbbbbrrlllrrrdddduuud", "uuddduuuffbbbfffllllllllfbbbbbffrrrrrrrrdduuuddd", "uuuuuuuuffffbbbfllllrrrlbbbbfffbrrrrlllrdddddddd"]
 
