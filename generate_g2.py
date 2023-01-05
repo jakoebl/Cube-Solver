@@ -102,11 +102,11 @@ def get_moves(string):
 
 
 # generates empty lookup list with 495 sublists (3 ** 7 elements each)
-def gen_empty_lookup_g2():
+def gen_empty_lookup():
     for index in range(1082565):
-        lookup_g2.append("")
-    lookup_g2[coordinate('20012001000100011001')] = [4]
-    lookup_g2[coordinate('01200120010001000110')] = [8]
+        lookup.append("")
+    lookup[coordinate('20012001000100011001')] = [4]
+    lookup[coordinate('01200120010001000110')] = [8]
 
 
 def is_new(pos, distribution):
@@ -116,9 +116,9 @@ def is_new(pos, distribution):
     return True
 
 
-def gen_lookup_g2():
+def gen_lookup():
     dist = [{"00000000000000001111"}, {'20012001000100011001', '01200120010001000110'}]
-    gen_empty_lookup_g2()
+    gen_empty_lookup()
     while dist[-1]:  # While latest set not empty
         print(len(dist[-1]))  # Shows distribution
         dist.append(set())
@@ -126,19 +126,15 @@ def gen_lookup_g2():
             for subpos in get_moves(pos):
                 if is_new(subpos, dist):
                     dist[-1].add(subpos)
-                    temp = []
-                    for index in range(len(lookup_g2[coordinate(pos)])):
-                        temp.append(lookup_g2[coordinate(pos)][index])
-                    temp.append(get_moves(pos).index(subpos))
-                    lookup_g2[coordinate(subpos)] = temp
+                    lookup[coordinate(subpos)] = lookup[coordinate(pos)] + [get_moves(pos).index(subpos)]
 
 
 # writes lookup for g2 to file
 def write_lookup(file):
-    gen_empty_lookup_g2()
-    gen_lookup_g2()
+    gen_empty_lookup()
+    gen_lookup()
     table_g2 = open(file, "w")
-    for lists in lookup_g2:
+    for lists in lookup:
         for element in lists:
             table_g2.write(str(element))
             table_g2.write(" ")
@@ -146,4 +142,4 @@ def write_lookup(file):
     table_g2.close()
 
 
-lookup_g2 = []
+lookup = []

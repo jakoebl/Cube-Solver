@@ -158,4 +158,4 @@ def solve(input_perm):
     return solution
 
 
-print(m.moves_string(solve(m.apply(m.F, m.R2, m.L, m.U2, m.D, m.B2, m.F, m.R, m.L2, m.F, m.D2, m.R2))))
+print(solve(input("Enter state: ")))

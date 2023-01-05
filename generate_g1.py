@@ -99,7 +99,7 @@ def gen_empty_lookup():
     return result
 
 
-def gen_lookup_g1():
+def gen_lookup():
     dist = [{0}, {1049, 356}]
     while dist[-1]:  # While latest set not empty
         print(len(dist[-1]))  # Shows distribution
@@ -108,20 +108,13 @@ def gen_lookup_g1():
             for subpos in get_moves(pos):
                 if subpos not in dist[-3] and subpos not in dist[-2] and subpos not in dist[-1]:
                     dist[-1].add(subpos)
-                    temp = []
-                    for index in range(len(lookup_g1[pos])):
-                        temp.append(lookup_g1[pos][index])
-                    temp.append(get_moves(pos).index(subpos))
-                    lookup_g1[subpos] = temp
-    for element in lookup_g1:
-        if element:
-            print(lookup_g1.index(element))
+                    lookup[subpos] = lookup[pos] + [get_moves(pos).index(subpos)]
 
 
 def write_lookup(file):
     table_g1 = open(file, "w")
-    gen_lookup_g1()
-    for lists in lookup_g1:
+    gen_lookup()
+    for lists in lookup:
         for move in lists:
             table_g1.write(str(move))
             table_g1.write(" ")
@@ -129,4 +122,4 @@ def write_lookup(file):
     table_g1.close()
 
 
-lookup_g1 = []
+lookup = []
