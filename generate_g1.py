@@ -5,32 +5,31 @@
 # moves affect edges
 # 100 means flipping the edge
 # otherwise this is perm of edges
-R_flip = (0, 4, 2, 3, 9, 5, 6, 1, 8, 7, 10, 11)
-R2_flip = (0, 9, 2, 3, 7, 5, 6, 4, 8, 1, 10, 11)
-Rp_flip = (0, 7, 2, 3, 1, 5, 6, 9, 8, 4, 10, 11)
+R = (0, 4, 2, 3, 9, 5, 6, 1, 8, 7, 10, 11)
+R2 = (0, 9, 2, 3, 7, 5, 6, 4, 8, 1, 10, 11)
+Rp = (0, 7, 2, 3, 1, 5, 6, 9, 8, 4, 10, 11)
 
-F_flip = (0, 1, 105, 3, 102, 108, 6, 7, 104, 9, 10, 11)
-F2_flip = (0, 1, 8, 3, 5, 4, 6, 7, 2, 9, 10, 11)
-Fp_flip = (0, 1, 104, 3, 108, 102, 6, 7, 105, 9, 10, 11)
+F = (0, 1, 105, 3, 102, 108, 6, 7, 104, 9, 10, 11)
+F2 = (0, 1, 8, 3, 5, 4, 6, 7, 2, 9, 10, 11)
+Fp = (0, 1, 104, 3, 108, 102, 6, 7, 105, 9, 10, 11)
 
-U_flip = (3, 0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 11)
-U2_flip = (2, 3, 0, 1, 4, 5, 6, 7, 8, 9, 10, 11)
-Up_flip = (1, 2, 3, 0, 4, 5, 6, 7, 8, 9, 10, 11)
+U = (3, 0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 11)
+U2 = (2, 3, 0, 1, 4, 5, 6, 7, 8, 9, 10, 11)
+Up = (1, 2, 3, 0, 4, 5, 6, 7, 8, 9, 10, 11)
 
-L_flip = (0, 1, 2, 6, 4, 3, 11, 7, 8, 9, 10, 5)
-L2_flip = (0, 1, 2, 11, 4, 6, 5, 7, 8, 9, 10, 3)
-Lp_flip = (0, 1, 2, 5, 4, 11, 3, 7, 8, 9, 10, 6)
+L = (0, 1, 2, 6, 4, 3, 11, 7, 8, 9, 10, 5)
+L2 = (0, 1, 2, 11, 4, 6, 5, 7, 8, 9, 10, 3)
+Lp = (0, 1, 2, 5, 4, 11, 3, 7, 8, 9, 10, 6)
 
-B_flip = (107, 1, 2, 3, 4, 5, 100, 110, 8, 9, 106, 11)
-B2_flip = (10, 1, 2, 3, 4, 5, 7, 6, 8, 9, 0, 11)
-Bp_flip = (106, 1, 2, 3, 4, 5, 110, 100, 8, 9, 107, 11)
+B = (107, 1, 2, 3, 4, 5, 100, 110, 8, 9, 106, 11)
+B2 = (10, 1, 2, 3, 4, 5, 7, 6, 8, 9, 0, 11)
+Bp = (106, 1, 2, 3, 4, 5, 110, 100, 8, 9, 107, 11)
 
-D_flip = (0, 1, 2, 3, 4, 5, 6, 7, 11, 8, 9, 10)
-D2_flip = (0, 1, 2, 3, 4, 5, 6, 7, 10, 11, 8, 9)
-Dp_flip = (0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 8)
+D = (0, 1, 2, 3, 4, 5, 6, 7, 11, 8, 9, 10)
+D2 = (0, 1, 2, 3, 4, 5, 6, 7, 10, 11, 8, 9)
+Dp = (0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 8)
 
-moves_flip = [U_flip, Up_flip, U2_flip, F_flip, Fp_flip, F2_flip, L_flip, Lp_flip, L2_flip,
-              B_flip, Bp_flip, B2_flip, R_flip, Rp_flip, R2_flip, D_flip, Dp_flip, D2_flip]
+moves = [U, Up, U2, F, Fp, F2, L, Lp, L2, B, Bp, B2, R, Rp, R2, D, Dp, D2]
 
 
 # takes coord and flip_move
@@ -39,9 +38,8 @@ moves_flip = [U_flip, Up_flip, U2_flip, F_flip, Fp_flip, F2_flip, L_flip, Lp_fli
 # converts string back to coordinate
 def coordinate_move(coordinate_int, move):  # coordinate int
     result = ""
-    move_table = move
     string = string_from_coordinate(coordinate_int)
-    for element in move_table:
+    for element in move:
         if element < 12:
             result += string[element]
         else:
@@ -85,7 +83,7 @@ def coordinate(string):
 
 def get_moves(coordinate):
     result = []
-    for move in moves_flip:
+    for move in moves:
         result.append(coordinate_move(coordinate, move))
     return result
 
@@ -99,7 +97,7 @@ def gen_empty_lookup():
     return result
 
 
-def gen_lookup_g1():
+def gen_lookup():
     dist = [{0}, {1049, 356}]
     while dist[-1]:  # While latest set not empty
         print(len(dist[-1]))  # Shows distribution
@@ -108,20 +106,13 @@ def gen_lookup_g1():
             for subpos in get_moves(pos):
                 if subpos not in dist[-3] and subpos not in dist[-2] and subpos not in dist[-1]:
                     dist[-1].add(subpos)
-                    temp = []
-                    for index in range(len(lookup_g1[pos])):
-                        temp.append(lookup_g1[pos][index])
-                    temp.append(get_moves(pos).index(subpos))
-                    lookup_g1[subpos] = temp
-    for element in lookup_g1:
-        if element:
-            print(lookup_g1.index(element))
+                    lookup[subpos] = lookup[pos] + [get_moves(pos).index(subpos)]
 
 
 def write_lookup(file):
     table_g1 = open(file, "w")
-    gen_lookup_g1()
-    for lists in lookup_g1:
+    gen_lookup()
+    for lists in lookup:
         for move in lists:
             table_g1.write(str(move))
             table_g1.write(" ")
@@ -129,4 +120,6 @@ def write_lookup(file):
     table_g1.close()
 
 
-lookup_g1 = []
+lookup = []
+# lookup = gen_empty_lookup()
+# gen_lookup()

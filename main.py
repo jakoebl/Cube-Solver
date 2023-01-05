@@ -158,4 +158,25 @@ def solve(input_perm):
     return solution
 
 
-print(m.moves_string(solve(m.apply(m.F, m.R2, m.L, m.U2, m.D, m.B2, m.F, m.R, m.L2, m.F, m.D2, m.R2))))
+colors = ("w", "r", "g", "o", "b", "y")
+sides = ("u", "f", "l", "b", "r", "d")
+
+
+def solve_to(mode):
+    for color in colors:
+        if scramble_colors.count(color) != 8:
+            return "Invalid Scramble, wrong amount of: " + color
+    scramble_sides = ""
+    for facelet in scramble_colors:
+        scramble_sides += sides[colors.index(facelet)]
+    solution = solve(scramble_sides)
+    if mode == "arduino":
+        return m.moves_arduino(solution)
+    if mode == "index":
+        return solution
+    return m.moves_string(solution)
+
+
+scramble_colors = input("Enter state: ")
+solve_mode = input("Enter Move Representation: ")
+print(solve_to(solve_mode))
