@@ -177,6 +177,6 @@ def solve_to(mode):
     return m.moves_string(solution)
 
 
-# scramble_colors = input("Enter state: ")
-# solve_mode = input("Enter Move Representation: ")
-# print(solve_to(solve_mode))
+scramble_colors = input("Enter state: ")
+solve_mode = input("Enter Move Representation: ")
+print(solve_to(solve_mode))
